@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tarefas/varios_screen/form_screen.dart';
 import '../components/task.dart';
 
 class Screen extends StatefulWidget {
@@ -9,39 +10,35 @@ class Screen extends StatefulWidget {
 }
 
 class _ScreenState extends State<Screen> {
-  bool opaco = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tarefas"),
       ),
-      body: AnimatedOpacity(
-        duration: const Duration(milliseconds: 800),
-        opacity: (opaco == true) ? 1 : 0,
-        child: ListView(
-          children: const [
-            Task("Estudando Flutter", 'assets/images/img1.png', 5),
-            Task("Andar de Bike", 'assets/images/img2.png', 2),
-            Task("Estudar", 'assets/images/img3.png', 1),
-            Task("Tranquilizar", 'assets/images/img3.png', 4),
-            Task(
-              "Jogar",
-              'assets/images/img2.png',
-              3,
-            ),
-          ],
-        ),
+      body: ListView(
+        children: const [
+          Task("Estudando Flutter", 'assets/images/img1.png', 5),
+          Task("Andar de Bike", 'assets/images/img2.jpg', 2),
+          Task("Estudar", 'assets/images/img3.jpg', 1),
+          Task("Tranquilizar", 'assets/images/img4.jpeg', 4),
+          Task(
+            "Jogar",
+            'assets/images/img5.jpg',
+            3,
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            opaco = !opaco;
-          });
-
-          // Add your onPressed code here!
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FormScreen(),
+            ),
+          );
         },
-        child: const Icon(Icons.remove_red_eye),
+        child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.blue[300],
