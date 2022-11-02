@@ -133,12 +133,16 @@ class _FormScreenState extends State<FormScreen> {
                           AnimatedSnackBar.material(
                             'Tarefa Salva',
                             type: AnimatedSnackBarType.success,
-                            mobileSnackBarPosition: MobileSnackBarPosition.bottom,
-                            desktopSnackBarPosition: DesktopSnackBarPosition.topRight,
+                            mobileSnackBarPosition:
+                                MobileSnackBarPosition.bottom,
+                            desktopSnackBarPosition:
+                                DesktopSnackBarPosition.topRight,
                             duration: const Duration(milliseconds: 50),
                           ).show(context);
 
-                    /*      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          Navigator.pop(context);
+
+                          /*      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                             content: Text("Tarefa Salva",textAlign: TextAlign.center),
                             backgroundColor: Colors.green,
                             padding: EdgeInsets.symmetric(
