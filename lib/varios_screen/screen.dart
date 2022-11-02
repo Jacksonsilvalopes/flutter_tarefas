@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tarefas/data/task_inherited.dart';
 import 'package:tarefas/varios_screen/form_screen.dart';
 import '../components/task.dart';
-import '../data/task_inherited.dart';
 
 class Screen extends StatefulWidget {
   const Screen({Key? key}) : super(key: key);
@@ -17,27 +17,15 @@ class _ScreenState extends State<Screen> {
       appBar: AppBar(
         title: const Text("Tarefas"),
       ),
-      body: TaskInherited (
-        child: ListView(
-          children: const [
-            Task("Estudando Flutter", 'assets/images/img1.png', 5),
-            Task("Andar de Bike", 'assets/images/img2.jpg', 2),
-            Task("Estudar", 'assets/images/img3.jpg', 1),
-            Task("Tranquilizar", 'assets/images/img4.jpeg', 4),
-            Task(
-              "Jogar",
-              'assets/images/img5.jpg',
-              3,
-            ),
-          ],
-        ),
+      body: ListView(
+        children: TaskInherited.of(context).taskList,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => FormScreen(),
+              builder: (contextNew) => FormScreen(taskContext: context),
             ),
           );
         },

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarefas/varios_screen/form_screen.dart';
+import 'data/task_inherited.dart';
 import 'varios_screen/screen.dart';
-
-
 
 void main() {
   runApp(const MyApp());
@@ -19,14 +18,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const Screen(),
+      home: TaskInherited(
+        child: Screen(),
+      ),
     );
   }
 }
-
-
-
-
-
-
-
