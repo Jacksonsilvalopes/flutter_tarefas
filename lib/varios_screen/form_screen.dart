@@ -3,6 +3,11 @@ import 'package:animated_snack_bar/animated_snack_bar.dart';
 
 import '../data/task_inherited.dart';
 
+const String _mesagemTarefa = "Digite a Tarefa";
+const String _mesagemDifficulty = "Insira Difficult entre 1 a 5 ";
+const String _mesagemUrl = "Insira URL válida";
+const String _tituloAppBar = "Nova Tarefa";
+
 class FormScreen extends StatefulWidget {
   const FormScreen({Key? key, required this.taskContext}  ) : super(key: key);
 
@@ -17,13 +22,20 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  bool valueValidator(String? value){
+    if(value != null && value.isEmpty){
+      return true;
+    }
+    return false;
+  }
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Nova Tarefa"),
+          title: const Text(_tituloAppBar),
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -43,9 +55,10 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.text,
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Digite a Tarefa";
+                        if (valueValidator(value)){
+                          return _mesagemTarefa;
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -64,11 +77,12 @@ class _FormScreenState extends State<FormScreen> {
                       keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       validator: (value) {
-                        if (value!.isEmpty ||
+                        if (valueValidator(value) ||
                             int.parse(value!) < 1 ||
-                            int.parse(value!) > 5) {
-                          return "Insira Difficult entre 1 a 5 ";
+                            int.parse(value) > 5) {
+                          return _mesagemDifficulty;
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -86,9 +100,10 @@ class _FormScreenState extends State<FormScreen> {
                       controller: imageController,
                       keyboardType: TextInputType.url,
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return "Insira URL válida";
+                        if (valueValidator(value)) {
+                          return _mesagemUrl;
                         }
+                        return null;
                       },
                       onChanged: (text) {
                         setState(() {});

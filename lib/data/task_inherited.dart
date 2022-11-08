@@ -29,7 +29,7 @@ class TaskInherited extends InheritedWidget {
 
   //obsever para verificar alteração na listas de tarefas
   @override
-  bool updateShouldNotify(TaskInherited old) {
-    return old.taskList.length != taskList.length;
+  bool updateShouldNotify(TaskInherited oldWidget) {
+    return oldWidget.taskList.length != taskList.length;
   }
 }

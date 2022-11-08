@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tarefas/data/task_inherited.dart';
 import 'package:tarefas/varios_screen/form_screen.dart';
-import '../components/task.dart';
+
 
 class Screen extends StatefulWidget {
   const Screen({Key? key}) : super(key: key);
@@ -18,7 +18,8 @@ class _ScreenState extends State<Screen> {
         title: const Text("Tarefas"),
       ),
       body: ListView(
-        children: TaskInherited.of(context).taskList,
+        // ignore: sort_child_properties_last
+        children: TaskInherited.of(context).taskList,padding: const EdgeInsets.only(bottom: 30),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

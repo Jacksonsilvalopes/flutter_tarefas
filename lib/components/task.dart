@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'difficult.dart';
 
+// ignore: must_be_immutable
 class Task extends StatefulWidget {
   final String tarefa;
   final String imagem;
   final int dificult;
 
-  const Task(this.tarefa, this.imagem, this.dificult, {Key? key})
+   Task(this.tarefa, this.imagem, this.dificult, {Key? key})
       : super(key: key);
-
+  int nivel = 0;
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  int nivel = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +51,12 @@ class _TaskState extends State<Task> {
                                   child: LinearProgressIndicator(
                                     color: Colors.white,
                                     value: (widget.dificult == 0)
-                                        ? nivel / 10
-                                        : (nivel / widget.dificult) / 10,
+                                        ? widget.nivel / 10
+                                        : (widget.nivel / widget.dificult) / 10,
                                   ),
                                 ),
                                 Text(
-                                  "Nivel: $nivel",
+                                  "Nivel: $widget.nivel",
                                   style: const TextStyle(color: Colors.white),
                                 ),
                               ]),
@@ -89,7 +90,11 @@ class _TaskState extends State<Task> {
                       child: ClipRRect(
                         borderRadius:
                         const BorderRadius.only(topLeft: Radius.circular(5)),
-                        child: Image.asset(
+                      //utilizando  metodo Dart para definir imagem
+                        child:(widget.imagem.contains("http"))? Image.network(
+                          widget.imagem,
+                          fit: BoxFit.cover,
+                        ):Image.asset(
                           widget.imagem,
                           fit: BoxFit.cover,
                         ),
@@ -109,7 +114,7 @@ class _TaskState extends State<Task> {
                           ),
                           onPressed: () {
                             setState(() {
-                              ++nivel;
+                              ++widget.nivel;
                             });
                           }),
                     )
