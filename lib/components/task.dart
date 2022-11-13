@@ -4,11 +4,11 @@ import 'difficult.dart';
 
 // ignore: must_be_immutable
 class Task extends StatefulWidget {
-  final String tarefa;
+  final String name;
   final String imagem;
   final int dificult;
 
-   Task(this.tarefa, this.imagem, this.dificult, {Key? key})
+   Task(this.name, this.imagem, this.dificult, {Key? key})
       : super(key: key);
   int nivel = 0;
   @override
@@ -100,7 +100,7 @@ class _TaskState extends State<Task> {
                         ),
                       ),
                     ),
-                    Difficult(dificultLevel: widget.dificult,tarefaLevel:widget.tarefa),
+                    Difficult(dificultLevel: widget.dificult,tarefaLevel:widget.name),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: 15, horizontal: 0),
