@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import 'package:tarefas/components/task.dart';
+import 'package:tarefas/data/task_dao.dart';
 
 import '../data/task_inherited.dart';
 
@@ -9,7 +11,7 @@ const String _mesagemUrl = "Insira URL válida";
 const String _tituloAppBar = "Nova Tarefa";
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({Key? key, required this.taskContext}  ) : super(key: key);
+  const FormScreen({Key? key, required this.taskContext}) : super(key: key);
 
   final BuildContext taskContext;
 
@@ -23,12 +25,13 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController imageController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  bool valueValidator(String? value){
-    if(value != null && value.isEmpty){
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
       return true;
     }
     return false;
   }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -55,7 +58,7 @@ class _FormScreenState extends State<FormScreen> {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.text,
                       validator: (value) {
-                        if (valueValidator(value)){
+                        if (valueValidator(value)) {
                           return _mesagemTarefa;
                         }
                         return null;
@@ -145,11 +148,12 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          // utilizando metodo que adiciona a nova tarefa na lista
-                          TaskInherited.of(widget.taskContext).newTask(
-                              nameController.text,
-                              imageController.text,
-                              int.parse(difficultyController.text));
+                          TaskDao().save(Task(
+                            nameController.text,
+                            imageController.text,
+                            int.parse(difficultyController.text),
+                          ));
+
 
                           AnimatedSnackBar.material(
                             'Tarefa Salva',

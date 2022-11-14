@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tarefas/data/task_dao.dart';
 
 import 'difficult.dart';
 
@@ -112,6 +113,9 @@ class _TaskState extends State<Task> {
                               Text("Up"),
                             ],
                           ),
+                          onLongPress: (){
+                            TaskDao().delete(widget.name);
+                          },
                           onPressed: () {
                             setState(() {
                               ++widget.nivel;
